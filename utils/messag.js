@@ -1,11 +1,14 @@
-const moment = require('moment')
+const f = Intl.DateTimeFormat('en-US', {
+  hour: 'numeric',
+  minute: 'numeric',
+  hour12: true,
+});
+const formatMsg = ({ userName, text }) => {
+  return {
+    userName,
+    text,
+    time: f.format(new Date()),
+  };
+};
 
-const formatMsg = (username, msg) => {
-    return {
-        username,
-        msg,
-        time: moment().format('h:mm: a')
-    }
-}
-
-module.exports = formatMsg
+module.exports = { formatMsg };

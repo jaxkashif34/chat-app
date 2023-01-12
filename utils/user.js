@@ -1,23 +1,16 @@
-const users = []
-const userJoin = (id, username, room) => {  // add a new user to the array users
-    const user = { id, username, room }
-    users.push(user)
-    return user
-}
+const users = [];
+const getUser = (user) => {
+  users.push(user);
+  return user;
+};
 
-const getCurrentUser = (id) => {    // get the user from the array users
-    return users.find(user => user.id === id)
-}
+const getUserBySocketId = (socketId) => users.find((user) => user.socketId === socketId);
 
-const userLeave = (id) => {  // remove the user from the array users
-    const index = users.findIndex(user => user.id === id)
-    if (index !== -1) {
-        return users.splice(index, 1)[0]
-    }
-}
+const getUsers = (roomName) => users.filter((user) => user.roomName === roomName);
+const getLeftUser = (socketId) => {
+  const index = users.findIndex((user) => user.socketId === socketId);
 
-const getRoomUsers = (room) => {    // get the users in the room
-    return users.filter(user => user.room === room)
-}
+  if (index !== -1) return users.splice(index, 1)[0];
+};
 
-module.exports = { userJoin, getCurrentUser, userLeave, getRoomUsers }
+module.exports = { getUser, getUsers, getUserBySocketId, getLeftUser };
